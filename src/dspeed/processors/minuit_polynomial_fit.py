@@ -2,9 +2,7 @@ from __future__ import annotations
 
 import numba as nb
 import numpy as np
-
 from numba import guvectorize
-from ..utils import numba_defaults_kwargs as nb_kwargs
 from pygama.utils import numba_math_defaults as nb_defaults
 
 
@@ -12,7 +10,7 @@ from pygama.utils import numba_math_defaults as nb_defaults
 def custom_polynomial(x: np.ndarray, coeffs_exps: np.ndarray) -> np.ndarray:
     midpoint = len(coeffs_exps) // 2
     coeffs, exps = np.split(coeffs_exps, [midpoint])
-    
+
     result = np.zeros_like(x)
     for i in range(midpoint):
         result += coeffs[i] * x ** (-exps[i])
@@ -24,9 +22,8 @@ def custom_polynomial(x: np.ndarray, coeffs_exps: np.ndarray) -> np.ndarray:
         "void(float32[:], float32[:], float32, float32, float32, float32, float32, float32, float32[:])",
         "void(float64[:], float64[:], float64, float64, float64, float64, float64, float64, float64[:])",
     ],
-    "(n),(n),(),(),(),(),(),(),(m)"
+    "(n),(n),(),(),(),(),(),(),(m)",
 )
-
 def minuit_polynomial_fit(
     pb_img_polar: np.ndarray,
     mask: np.ndarray,
@@ -36,7 +33,7 @@ def minuit_polynomial_fit(
     dr: float,
     in_fov: float,
     out_fov: float,
-    pb_coeffs_exps: np.ndarray
+    pb_coeffs_exps: np.ndarray,
 ):
     """
     Parameters
@@ -49,17 +46,16 @@ def minuit_polynomial_fit(
 
     pb_coeffs_exps[:] = np.nan
 
-    params = np.ones(int(deg*2)) # da rimettere come argomento
+    params = np.ones(int(deg * 2))  # da rimettere come argomento
 
     num = np.around((out_fov - in_fov) / (dr * r_sun_pixel), decimals=0)
-    r_arr = np.linspace(in_fov, out_fov, int(num)+1) / r_sun_pixel
+    r_arr = np.linspace(in_fov, out_fov, int(num) + 1) / r_sun_pixel
 
-    x_data = r_arr[mask==1]
-    y_data = pb_img_polar[mask==1] * 10 ** 8
-    y_error = y_data / 100 * 1
+    x_data = r_arr[mask == 1]
+    y_data = pb_img_polar[mask == 1] * 10**8
 
-    learning_rate=0.01
-    epochs=1000
+    learning_rate = 0.01
+    epochs = 1000
 
     for _ in range(epochs):
         grad = np.zeros_like(params)
@@ -75,4 +71,3 @@ def minuit_polynomial_fit(
         params -= learning_rate * grad
 
     pb_coeffs_exps[:] = params
-

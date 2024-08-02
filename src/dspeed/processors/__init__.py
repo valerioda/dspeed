@@ -61,6 +61,7 @@ several advantages:
 
 from .bl_subtract import bl_subtract
 from .convolutions import convolve_wf, fft_convolve_wf
+from .create_mask import create_mask
 from .dwt import discrete_wavelet_transform
 from .energy_kernels import cusp_filter, dplms, zac_filter
 from .fixed_time_pickoff import fixed_time_pickoff
@@ -68,11 +69,11 @@ from .gaussian_filter1d import gaussian_filter1d
 from .get_multi_local_extrema import get_multi_local_extrema
 from .get_wf_centroid import get_wf_centroid
 from .histogram import histogram, histogram_stats
-from .inl_correction import inl_correction
 from .kernels import moving_slope, step, t0_filter
 from .linear_slope_fit import linear_slope_diff, linear_slope_fit
 from .log_check import log_check
 from .min_max import min_max, min_max_norm
+from .minuit_polynomial_fit import minuit_polynomial_fit
 from .moving_windows import (
     avg_current,
     moving_window_left,
@@ -106,8 +107,6 @@ from .upsampler import interpolating_upsampler, upsampler
 from .wf_alignment import wf_alignment
 from .wiener_filter import wiener_filter
 from .windower import windower
-from .create_mask import create_mask
-from .minuit_polynomial_fit import minuit_polynomial_fit
 
 __all__ = [
     "bl_subtract",
@@ -171,7 +170,6 @@ __all__ = [
     "transfer_function_convolver",
     "rc_cr2",
     "bi_level_zero_crossing_time_points",
-    "inl_correction",
     "create_mask",
     "minuit_polynomial_fit",
 ]
