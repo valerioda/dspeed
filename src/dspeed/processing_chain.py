@@ -2338,6 +2338,7 @@ def build_processing_chain(
                     )
                 module = importlib.import_module(recipe["function"][:p])
                 func = getattr(module, recipe["function"][p + 1 :])
+
             args = recipe["args"]
             new_vars = [k for k in re.split(",| ", proc_par) if k != ""]
 
@@ -2384,6 +2385,7 @@ def build_processing_chain(
                                     f"did not find {db_var} in database, and "
                                     f"could not find default value."
                                 )
+
                         if arg == db_var:
                             arg = db_node
                         else:

@@ -64,6 +64,7 @@ from .convolutions import (
     convolve_damped_oscillator,
     convolve_exp,
     convolve_wf,
+    convolve_wf_with_threshold,
     fft_convolve_wf,
 )
 from .dwt import discrete_wavelet_transform
@@ -124,6 +125,7 @@ from .windower import windower
 __all__ = [
     "bl_subtract",
     "convolve_wf",
+    "convolve_wf_with_threshold",
     "fft_convolve_wf",
     "cusp_filter",
     "t0_filter",

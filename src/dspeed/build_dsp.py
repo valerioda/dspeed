@@ -177,7 +177,7 @@ def build_dsp(
             if f_aux is not None:
                 lh5_in_aux = lh5.read(tb, f_aux, start_row, n_rows)
             else:
-                lh5_it_aux = None
+                lh5_in_aux = None
 
             if proc_chain is None:
                 proc_chain, lh5_it.field_mask, tb_out = build_processing_chain(
