@@ -32,6 +32,7 @@ def build_dsp(
     buffer_len: int = 3200,
     block_width: int = 16,
     chan_config: dict[str, str] = None,
+    f_aux: str = None,
 ) -> None:
     """Convert raw-tier LH5 data into dsp-tier LH5 data by running a sequence
     of processors via the :class:`~.processing_chain.ProcessingChain`.
@@ -169,12 +170,18 @@ def build_dsp(
 
         # Main processing loop
         lh5_it = lh5.LH5Iterator(f_raw, tb, buffer_len=buffer_len)
+            
         proc_chain = None
         for lh5_in, start_row, n_rows in lh5_it:
             # Initialize
+            if f_aux is not None:
+                lh5_in_aux = lh5.read(tb, f_aux, start_row, n_rows)
+            else:
+                lh5_it_aux = None
+
             if proc_chain is None:
                 proc_chain, lh5_it.field_mask, tb_out = build_processing_chain(
-                    lh5_in, dsp_config, db_dict, outputs, block_width
+                    lh5_in, dsp_config, db_dict, outputs, block_width, lh5_in_aux
                 )
                 if log.getEffectiveLevel() >= logging.INFO:
                     progress_bar = tqdm(

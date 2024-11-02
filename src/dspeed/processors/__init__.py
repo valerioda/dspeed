@@ -117,6 +117,7 @@ from .transfer_function_convolver import transfer_function_convolver
 from .trap_filters import asym_trap_filter, trap_filter, trap_norm, trap_pickoff
 from .upsampler import interpolating_upsampler, upsampler
 from .wf_alignment import wf_alignment
+from .wf_correction import wf_correction
 from .wiener_filter import wiener_filter
 from .windower import windower
 
@@ -191,4 +192,5 @@ __all__ = [
     "classification_layer_no_bias",
     "classification_layer_with_bias",
     "normalisation_layer",
+    "wf_correction",
 ]
