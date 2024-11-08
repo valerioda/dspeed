@@ -33,6 +33,7 @@ def build_dsp(
     block_width: int = 16,
     chan_config: dict[str, str] = None,
     f_aux: str = None,
+    aux_type: str = "raw",
 ) -> None:
     """Convert raw-tier LH5 data into dsp-tier LH5 data by running a sequence
     of processors via the :class:`~.processing_chain.ProcessingChain`.
@@ -175,7 +176,7 @@ def build_dsp(
         for lh5_in, start_row, n_rows in lh5_it:
             # Initialize
             if f_aux is not None:
-                lh5_in_aux = lh5.read(tb, f_aux, start_row, n_rows)
+                lh5_in_aux = lh5.read(f"{chan_name}/{aux_type}", f_aux, start_row, n_rows)
             else:
                 lh5_in_aux = None
 
