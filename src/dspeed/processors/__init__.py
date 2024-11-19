@@ -74,17 +74,11 @@ from .get_multi_local_extrema import get_multi_local_extrema
 from .get_wf_centroid import get_wf_centroid
 from .histogram import histogram, histogram_stats
 from .inject_ringing import inject_damped_oscillation
+from .inl_correction import inl_correction
 from .kernels import moving_slope, step, t0_filter
 from .linear_slope_fit import linear_slope_diff, linear_slope_fit
 from .log_check import log_check
 from .min_max import min_max, min_max_norm
-from .ml import (
-    classification_layer_no_bias,
-    classification_layer_with_bias,
-    dense_layer_no_bias,
-    dense_layer_with_bias,
-    normalisation_layer,
-)
 from .moving_windows import (
     avg_current,
     moving_window_left,
@@ -105,7 +99,6 @@ from .round_to_nearest import round_to_nearest
 from .saturation import saturation
 from .soft_pileup_corr import soft_pileup_corr, soft_pileup_corr_bl
 from .svm import svm_predict
-from .tf_model import tf_model
 from .time_over_threshold import time_over_threshold
 from .time_point_thresh import (
     bi_level_zero_crossing_time_points,
@@ -161,7 +154,6 @@ __all__ = [
     "soft_pileup_corr",
     "soft_pileup_corr_bl",
     "svm_predict",
-    "tf_model",
     "time_point_thresh",
     "interpolated_time_point_thresh",
     "multi_time_point_thresh",
@@ -186,9 +178,5 @@ __all__ = [
     "convolve_exp",
     "convolve_damped_oscillator",
     "inject_damped_oscillation",
-    "dense_layer_no_bias",
-    "dense_layer_with_bias",
-    "classification_layer_no_bias",
-    "classification_layer_with_bias",
-    "normalisation_layer",
+    "inl_correction",
 ]
